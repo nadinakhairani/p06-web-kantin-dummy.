@@ -89,7 +89,7 @@
   <div class="panel">
     <label for="key">API key Gemini milik sendiri</label><input id="key" type="password" autocomplete="off"
       placeholder="Tempel API key di sini; jangan pernah commit key">
-    <label for="modelName">Nama model Gemini</label><input id="modelName" value="gemini-2.5-flash">
+    <label for="modelName">Nama model Gemini</label><input id="modelName" value="gemini-3.8-flash">
     <small>Key tidak ada di kode. Penyimpanan opsional hanya di sessionStorage selama sesi ini, dengan try/catch. Hapus
       key setelah selesai dan jangan screenshot key.</small>
     <label for="pesan">Pesan / payload uji</label><textarea id="pesan"
@@ -108,7 +108,7 @@
     const VERSI = "rentan";
     const NPM = "24781109";
     const KONTEKS = { aplikasi: "kantin", menu: [{ nama: "Nasi goreng", harga: 12000 }, { nama: "Mie goreng", harga: 10000 }, { nama: "Es teh", harga: 4000 }], fitur: ["informasi menu", "informasi harga"] };
-    const LOG = { app: "P06-WEB-DUMMY", npm: NPM, kasus: "KANTIN-DIRECT-INJECTION", versi: VERSI, model: "gemini-2.5-flash", entries: [] };
+    const LOG = { app: "P06-WEB-DUMMY", npm: NPM, kasus: "KANTIN-DIRECT-INJECTION", versi: VERSI, model: "gemini-3.8-flash", entries: [] };
     function simpanKey(v) { try { sessionStorage.setItem("p06-kantin-key", v) } catch (e) { } }
     function bacaKey() { try { return sessionStorage.getItem("p06-kantin-key") || "" } catch (e) { return "" } }
     async function llmAsli(prompt) {
