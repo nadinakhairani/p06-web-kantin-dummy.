@@ -89,7 +89,7 @@
   <div class="panel">
     <label for="key">API key Gemini milik sendiri</label><input id="key" type="password" autocomplete="off"
       placeholder="Tempel API key di sini; jangan pernah commit key">
-    <label for="modelName">Nama model Gemini</label><input id="modelName" value="gemini-2.5-flash">
+    <label for="modelName">Nama model Gemini</label><input id="modelName" value="gemini-3.8-flash">
     <small>Key tidak ada di kode. Penyimpanan opsional hanya di sessionStorage selama sesi ini, dengan try/catch. Hapus
       key setelah selesai dan jangan screenshot key.</small>
     <label for="pesan">Pesan / payload uji</label><textarea id="pesan"
@@ -108,14 +108,14 @@
     const VERSI = "aman";
     const NPM = "24781109";
     const KONTEKS = { aplikasi: "kantin", menu: [{ nama: "Nasi goreng", harga: 12000 }, { nama: "Mie goreng", harga: 10000 }, { nama: "Es teh", harga: 4000 }], fitur: ["informasi menu", "informasi harga"] };
-    const LOG = { app: "P06-WEB-DUMMY", npm: NPM, kasus: "KANTIN-DIRECT-INJECTION", versi: VERSI, model: "gemini-2.5-flash", entries: [] };
+    const LOG = { app: "P06-WEB-DUMMY", npm: NPM, kasus: "KANTIN-DIRECT-INJECTION", versi: VERSI, model: "gemini-3.8-flash", entries: [] };
     function simpanKey(v) { try { sessionStorage.setItem("p06-kantin-key", v) } catch (e) { } }
     function bacaKey() { try { return sessionStorage.getItem("p06-kantin-key") || "" } catch (e) { return "" } }
     async function llmAsli(prompt) {
       const key = (document.getElementById("key").value || bacaKey()).trim();
       if (!key) throw new Error("Masukkan API key Gemini milik sendiri dulu.");
       simpanKey(key);
-      const modelName = document.getElementById("modelName").value.trim() || "gemini-2.5-flash"; LOG.model = modelName;
+      const modelName = document.getElementById("modelName").value.trim() || "gemini-3.8-flash"; LOG.model = modelName;
       const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + encodeURIComponent(modelName) + ":generateContent", { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
       const data = await response.json(); if (!response.ok) throw new Error(data.error?.message || ("API gagal: HTTP " + response.status));
       return data.candidates?.[0]?.content?.parts?.map(p => p.text || "").join("") || "Model tidak memberikan teks.";
